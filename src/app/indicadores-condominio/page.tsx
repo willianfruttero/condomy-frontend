@@ -1,0 +1,109 @@
+// Página gerada: /indicadores-condominio
+import React from 'react';
+
+export default function IndicadoresCondominio() {
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1>IndicadoresCondominio</h1>
+
+      {/* mockscreen */}
+      <!DOCTYPE html><html lang="pt-br"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Indicadores do Condomínio</title>
+        <link href="https://fonts.googleapis.com/css?family=Inter:400,600&amp;display=swap" rel="stylesheet">
+        <style>
+          * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+          body { background: #f7f9fc; padding: 20px; color: #333; }
+          h1 { font-size: 24px; margin-bottom: 25px; }
+      
+          .indicadores-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+          }
+      
+          .card {
+            background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 18px; display: flex; flex-direction: column; gap: 10px;
+          }
+      
+          .card h2 {
+            font-size: 20px; margin-bottom: 5px; color: #2c3e50;
+          }
+      
+          .valor {
+            font-size: 28px; font-weight: 600; color: #27ae60;
+          }
+      
+          .grafico {
+            height: 100px; background: #e9ecef; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; color: #888;
+          }
+      
+          .filtro-bar {
+            display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;
+          }
+      
+          .filtro-bar select {
+            padding: 10px; border-radius: 6px; border: 1px solid #ccc;
+            min-width: 200px;
+          }
+      
+          @media (max-width: 500px) {
+            .indicadores-grid { grid-template-columns: 1fr; }
+            .filtro-bar { flex-direction: column; }
+            .filtro-bar select { width: 100%; }
+          }
+        </style>
+      </head>
+      <body>
+        <h1>📊 Indicadores do Condomínio</h1>
+      
+        <div className="filtro-bar">
+          <select>
+            <option>Últimos 30 dias</option>
+            <option>Últimos 60 dias</option>
+            <option>Semestre</option>
+            <option>Personalizar</option>
+          </select>
+          <select>
+            <option>Todos os blocos</option>
+            <option>Bloco A</option>
+            <option>Bloco B</option>
+            <option>Bloco C</option>
+          </select>
+        </div>
+      
+        <div className="indicadores-grid">
+          <div className="card">
+            <h2>Ocorrências Resolvidas</h2>
+            <div className="valor">18</div>
+            <div className="grafico">📈 Gráfico mockado</div>
+          </div>
+      
+          <div className="card">
+            <h2>Serviços Concluídos</h2>
+            <div className="valor">24</div>
+            <div className="grafico">🛠️ Visualização simulada</div>
+          </div>
+      
+          <div className="card">
+            <h2>Gasto Mensal</h2>
+            <div className="valor">R$ 12.450</div>
+            <div className="grafico">💰 Divisão por categoria</div>
+          </div>
+      
+          <div className="card">
+            <h2>Avaliação dos Condôminos</h2>
+            <div className="valor">4.6 ⭐</div>
+            <div className="grafico">📊 NPS (mockado)</div>
+          </div>
+        </div>
+      
+      
+      </body></html>
+
+    </div>
+  );
+}

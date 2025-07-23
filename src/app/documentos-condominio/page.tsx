@@ -1,0 +1,138 @@
+// Página gerada: /documentos-condominio
+import React from 'react';
+
+export default function DocumentosCondominio() {
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1>DocumentosCondominio</h1>
+
+      {/* mockscreen */}
+      <!DOCTYPE html><html lang="pt-br"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Documentos do Condomínio</title>
+        <link href="https://fonts.googleapis.com/css?family=Inter:400,600&amp;display=swap" rel="stylesheet">
+        <style>
+          * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+          body { background: #f2f4f8; padding: 20px; color: #333; }
+      
+          header {
+            display: flex; flex-direction: column; gap: 6px; margin-bottom: 15px;
+          }
+      
+          h1 {
+            font-size: 24px; font-weight: 600;
+          }
+      
+          .perfil-logado {
+            font-size: 14px; color: #555; text-align: right;
+          }
+      
+          .filtros {
+            display: flex; flex-wrap: wrap; gap: 15px; margin: 25px 0;
+          }
+      
+          .filtros select, .filtros input {
+            padding: 10px; border-radius: 6px; border: 1px solid #ccc; min-width: 180px;
+          }
+      
+          .documentos-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+          }
+      
+          .card {
+            background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 16px; display: flex; flex-direction: column; gap: 10px;
+          }
+      
+          .card h2 {
+            font-size: 18px; margin-bottom: 4px; color: #2c3e50;
+          }
+      
+          .card span {
+            font-size: 14px; color: #666;
+          }
+      
+          .acoes {
+            display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;
+          }
+      
+          .acoes button {
+            padding: 8px 12px; font-size: 14px; border: none; border-radius: 5px;
+            cursor: pointer;
+          }
+      
+          .btn-download { background: #2980b9; color: #fff; }
+          .btn-visualizar { background: #bdc3c7; color: #333; }
+      
+          @media (max-width: 500px) {
+            .filtros { flex-direction: column; }
+            .filtros select, .filtros input { width: 100%; }
+          }
+        </style>
+      </head>
+      <body>
+        <header>
+          <h1>📁 Documentos do Condomínio</h1>
+          <div className="perfil-logado">Logado como <strong>João Mendes — Bloco B / Ap. 204</strong></div>
+        </header>
+      
+        <div className="filtros">
+          <select>
+            <option>Todos os tipos</option>
+            <option>Atas de reunião</option>
+            <option>Balancetes</option>
+            <option>Regimento interno</option>
+            <option>Circulares</option>
+          </select>
+          <select>
+            <option>Todos os blocos</option>
+            <option>Bloco A</option>
+            <option>Bloco B</option>
+            <option>Bloco C</option>
+          </select>
+          <input type="date">
+        </div>
+      
+        <div className="documentos-grid">
+          <div className="card">
+            <h2>📑 Ata Reunião 15/06</h2>
+            <span>Tipo: Ata de reunião</span>
+            <span>Data: 15/06/2025</span>
+            <span>Bloco A</span>
+            <div className="acoes">
+              <button className="btn-download">Download</button>
+              <button className="btn-visualizar">Visualizar</button>
+            </div>
+          </div>
+      
+          <div className="card">
+            <h2>💰 Balancete Junho</h2>
+            <span>Tipo: Financeiro</span>
+            <span>Data: 30/06/2025</span>
+            <span>Todos os blocos</span>
+            <div className="acoes">
+              <button className="btn-download">Download</button>
+              <button className="btn-visualizar">Visualizar</button>
+            </div>
+          </div>
+      
+          <div className="card">
+            <h2>📦 Circular Limpeza</h2>
+            <span>Tipo: Circular</span>
+            <span>Data: 05/07/2025</span>
+            <span>Bloco B</span>
+            <div className="acoes">
+              <button className="btn-download">Download</button>
+              <button className="btn-visualizar">Visualizar</button>
+            </div>
+          </div>
+        </div>
+      
+      
+      </body></html>
+
+    </div>
+  );
+}

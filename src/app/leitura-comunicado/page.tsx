@@ -1,0 +1,160 @@
+// Página gerada: /leitura-comunicado
+import React from 'react';
+
+export default function LeituraComunicado() {
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1>LeituraComunicado</h1>
+
+      {/* mockscreen */}
+      <!DOCTYPE html><html lang="pt-BR"><head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Leitura do Comunicado</title>
+          <style>
+              :root {
+                  --azul: #005eaa;
+                  --cinza-bg: #f4f6f8;
+                  --cinza-card: #f0f2f5;
+                  --cinza-borda: #ccc;
+                  --vermelho: #dc3545;
+              }
+      
+              * {
+                  box-sizing: border-box;
+              }
+      
+              body {
+                  margin: 0;
+                  font-family: 'Segoe UI', sans-serif;
+                  background: var(--cinza-bg);
+                  color: #333;
+              }
+      
+              header {
+                  padding: 1rem 2rem;
+                  background-color: var(--azul);
+                  color: white;
+              }
+      
+              .container {
+                  max-width: 800px;
+                  margin: 2rem auto;
+                  background: white;
+                  padding: 2rem;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+              }
+      
+              h2 {
+                  margin-top: 0;
+                  color: var(--azul);
+                  font-size: 1.4rem;
+              }
+      
+              .section {
+                  margin-bottom: 2rem;
+              }
+      
+              .meta {
+                  font-size: 0.95rem;
+                  color: #666;
+                  margin-bottom: 1rem;
+              }
+      
+              .urgente {
+                  background-color: var(--vermelho);
+                  color: white;
+                  padding: 0.3rem 0.6rem;
+                  font-size: 0.85rem;
+                  border-radius: 4px;
+                  display: inline-block;
+              }
+      
+              .descricao {
+                  background-color: var(--cinza-card);
+                  padding: 1rem;
+                  border-radius: 6px;
+                  white-space: pre-line;
+              }
+      
+              .btn {
+                  background-color: var(--azul);
+                  color: white;
+                  padding: 0.8rem 1.2rem;
+                  border: none;
+                  border-radius: 4px;
+                  font-weight: bold;
+                  cursor: pointer;
+              }
+      
+              .btn:hover {
+                  background-color: #003f80;
+              }
+      
+              .status {
+                  font-weight: bold;
+                  margin-top: 1rem;
+                  font-size: 1rem;
+              }
+      
+              .anexos a {
+                  display: block;
+                  margin: 0.3rem 0;
+                  color: var(--azul);
+                  text-decoration: underline;
+                  font-size: 0.95rem;
+              }
+      
+              @media (max-width: 600px) {
+                  .container {
+                      padding: 1rem;
+                  }
+      
+                  .btn {
+                      width: 100%;
+                  }
+              }
+          </style>
+      </head>
+      
+      <body>
+          <header>
+              <h1>Área do Morador</h1>
+              <p>Leitura do Comunicado | José da Silva</p>
+          </header>
+      
+          <div className="container">
+              <h2>🚨 Comunicado: Reunião Extraordinária - 25/08/2025</h2>
+              <p className="meta">
+                  Enviado em: <strong>18/08/2025</strong> &nbsp;|&nbsp;
+                  Categoria: <span className="urgente">Urgente</span>
+              </p>
+      
+              <div className="section descricao">
+                  Prezados moradores,
+      
+                  Comunicamos que haverá uma reunião extraordinária no dia 25 de agosto às 19h no salão principal do bloco A.
+                  O objetivo é discutir ajustes orçamentários do condomínio e sugestões de melhoria estrutural.
+      
+                  A presença é altamente recomendada.
+              </div>
+      
+              <div className="section anexos">
+                  <h3>📎 Anexos</h3>
+                  <a href="#">[PDF] Edital Convocação</a>
+                  <a href="#">[DOC] Proposta de Orçamento 2025</a>
+              </div>
+      
+              <div className="section">
+                  <p className="status">Status: <strong>Pendente</strong></p>
+                  <button className="btn">✅ Marcar como Lido</button>
+              </div>
+          </div>
+      
+      
+      </body></html>
+
+    </div>
+  );
+}
