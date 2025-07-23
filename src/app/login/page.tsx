@@ -1,15 +1,12 @@
+import React from 'react';
+import { Input } from '@/components/atoms/Input';
+import { Button } from '@/components/atoms/Button';
+
 /**
- * page.tsx
- * Página de login: usa Input e Button
+ * LoginPage: formulário simples de login.
  */
-
-import React from 'react'
-import { Input } from '@/components/atoms/Input'
-import { Button } from '@/components/atoms/Button'
-
 export default function LoginPage() {
   return (
-    // centraliza o formulário na tela
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <form className="bg-white p-8 rounded shadow w-full max-w-sm">
         <h1 className="text-2xl font-bold mb-6">Entrar</h1>
@@ -24,5 +21,5 @@ export default function LoginPage() {
         <Button type="submit">Login</Button>
       </form>
     </div>
-  )
+  );
 }

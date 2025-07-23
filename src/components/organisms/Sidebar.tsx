@@ -1,12 +1,9 @@
+import React from 'react';
+import Link from 'next/link';
+
 /**
- * Sidebar.tsx
- * Organismo: menu lateral fixo
+ * Sidebar: menu lateral com links para as páginas administrativas.
  */
-
-import React from 'react'
-import Link from 'next/link'
-
-// Função que renderiza a barra lateral
 export function Sidebar() {
   return (
     <nav className="w-60 bg-gray-800 text-white h-full p-4">
@@ -17,5 +14,5 @@ export function Sidebar() {
         <li><Link href="/admin-global/pagamentos">Pagamentos</Link></li>
       </ul>
     </nav>
-  )
+  );
 }
