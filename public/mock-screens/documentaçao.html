@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Condomy — Documentação Completa & Arquitetura</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Reset & Base */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background:#f7f8fa; color:#333; line-height:1.6; }
+    a { color:#1a73e8; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    /* Layout */
+    header { background:#1a73e8; color:#fff; padding:1rem;
+             position:fixed; top:0; left:0; width:100%; z-index:1000; }
+    header h1 { font-size:1.8rem; }
+    header p { margin-top:.25rem; font-size:.9rem; }
+    nav { position:fixed; top:72px; left:0; bottom:0;
+          width:240px; background:#fff; border-right:1px solid #ddd;
+          overflow-y:auto; padding:1rem; }
+    main { margin:80px 2rem 2rem 260px; }
+
+    /* Sections */
+    section { margin-bottom:3rem; }
+    .section-title { font-size:1.5rem; color:#1a73e8;
+                     border-bottom:2px solid #e0e0e0;
+                     padding-bottom:.5rem; margin-bottom:1rem; }
+
+    /* Navigation */
+    nav ul { list-style:none; }
+    nav li { margin:0.5rem 0; }
+    nav a { display:block; padding:0.5rem; border-radius:4px; }
+    nav a.active, nav a:hover { background:#e8f0fe; }
+
+    /* Code & Trees */
+    pre { background:#eef2f7; padding:1rem; overflow:auto; border-radius:4px; }
+    code { font-family:monospace; }
+
+    /* Lists */
+    ul { margin:1rem 0; padding-left:1.2rem; }
+    ul li { margin:0.5rem 0; }
+
+    /* Mock-Screens list */
+    ul.files-list { list-style:none; padding-left:0; }
+    ul.files-list li { margin:.3rem 0; }
+
+    /* Footer */
+    footer { text-align:center; padding:1rem;
+             border-top:1px solid #ddd; margin-top:4rem;
+             color:#777; font-size:.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Condomy Documentation</h1>
+    <p>Arquitetura Completa, Mock-Screens, Backend, Frontend, Integrações e Gestão de Acessos</p>
+  </header>
+
+  <!-- Sidebar Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#overview">1. Visão Geral</a></li>
+      <li><a href="#stack">2. Stack Tecnológico</a></li>
+      <li><a href="#structure">3. Estrutura de Pastas</a></li>
+      <li><a href="#mocks">4. Mock-Screens & UI</a></li>
+      <li><a href="#backend">5. Backend</a></li>
+      <li><a href="#frontend">6. Frontend</a></li>
+      <li><a href="#api">7. API Contracts</a></li>
+      <li><a href="#integration">8. Integrações de Boletos</a></li>
+      <li><a href="#cicd">9. CI/CD & Deploy</a></li>
+      <li><a href="#best-practices">10. Boas Práticas</a></li>
+      <li><a href="#glossary">11. Glossário</a></li>
+      <li><a href="#admin-access">12. Admin & Acessos</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- 1. Visão Geral -->
+    <section id="overview">
+      <h2 class="section-title">1. Visão Geral</h2>
+      <p>
+        Condomy é a plataforma SaaS multi-tenant para gestão completa de condomínios:
+      </p>
+      <ul>
+        <li>Administração financeira e emissão de boletos;</li>
+        <li>Comunicação interna entre moradores;</li>
+        <li>Reservas de áreas comuns;</li>
+        <li>Relatórios e dashboards gerenciais.</li>
+      </ul>
+      <p>
+        Nossa arquitetura segmenta responsabilidades entre um Administrador Global, Administradores de Condomínio (Síndicos) e Unidades, garantindo isolamento de dados e controle de acesso granular.
+      </p>
+    </section>
+
+    <!-- 2. Stack Tecnológico -->
+    <section id="stack">
+      <h2 class="section-title">2. Stack Tecnológico</h2>
+      <ul>
+        <li>
+          <strong>Frontend</strong>: Next.js (SSR/SSG), React, TypeScript, Styled-Components, Vite
+        </li>
+        <li>
+          <strong>Backend</strong>: Java 17 + Spring Boot 3, Spring Cloud Gateway, Spring Data JPA, PostgreSQL, RabbitMQ
+        </li>
+        <li>
+          <strong>Infraestrutura</strong>: Docker, Kubernetes (EKS), AWS (EC2, RDS, S3), Terraform
+        </li>
+        <li>
+          <strong>CI/CD & Observabilidade</strong>: GitHub Actions, SonarCloud, ELK Stack, Prometheus + Grafana
+        </li>
+      </ul>
+    </section>
+
+    <!-- 3. Estrutura de Pastas -->
+    <section id="structure">
+      <h2 class="section-title">3. Estrutura de Pastas</h2>
+      <h3>Backend Monorepo</h3>
+      <pre><code>
+/condomy-backend
+├─ api-gateway/
+├─ auth-service/
+├─ condominium-service/
+├─ communication-service/
+├─ finance-service/
+├─ common-lib/
+├─ infra/terraform/
+└─ scripts/start-all.sh
+      </code></pre>
+
+      <h3>Frontend Next.js App</h3>
+      <pre><code>
+/condomy-frontend
+├─ public/
+│  └─ mock-screens/
+├─ src/
+│  ├─ app/
+│  ├─ components/
+│  ├─ hooks/
+│  ├─ services/api.ts
+│  ├─ styles/globals.css
+│  └─ utils/
+└─ scripts/generate-mocks.js
+      </code></pre>
+    </section>
+
+    <!-- 4. Mock-Screens & UI -->
+    <section id="mocks">
+      <h2 class="section-title">4. Mock-Screens & UI Prototypes</h2>
+      <p>
+        Todos os protótipos em <code>public/mock-screens</code> servirão de base para os componentes React. Clique para abrir cada página:
+      </p>
+      <ul class="files-list">
+        <li><a href="agenda-comunicados.html" target="_blank">agenda-comunicados.html</a></li>
+        <li><a href="agenda-servicos.html" target="_blank">agenda-servicos.html</a></li>
+        <li><a href="boletos-e-pagamentos.html" target="_blank">boletos-e-pagamentos.html</a></li>
+        <li><a href="cadastro-comunicados.html" target="_blank">cadastro-comunicados.html</a></li>
+        <li><a href="cadastro-fornecedores.html" target="_blank">cadastro-fornecedores.html</a></li>
+        <li><a href="cadastro-unidade.html" target="_blank">cadastro-unidade.html</a></li>
+        <li><a href="condominios-gerenciador.html" target="_blank">condominios-gerenciador.html</a></li>
+        <li><a href="dashboard-admin-global.html" target="_blank">dashboard-admin-global.html</a></li>
+        <li><a href="documentos-condominio.html" target="_blank">documentos-condominio.html</a></li>
+        <li><a href="estatisticas-comunicados.html" target="_blank">estatisticas-comunicados.html</a></li>
+        <li><a href="eventos-condominio.html" target="_blank">eventos-condominio.html</a></li>
+        <li><a href="financeiro-condominio.html" target="_blank">financeiro-condominio.html</a></li>
+        <li><a href="fornecedores-visualizacao.html" target="_blank">fornecedores-visualizacao.html</a></li>
+        <li><a href="historico-envios.html" target="_blank">historico-envios.html</a></li>
+        <li><a href="historico-financeiro.html" target="_blank">historico-financeiro.html</a></li>
+        <li><a href="indicadores-condominio.html" target="_blank">indicadores-condominio.html</a></li>
+        <li><a href="leitura-comunicado.html" target="_blank">leitura-comunicado.html</a></li>
+        <li><a href="login.html" target="_blank">login.html</a></li>
+        <li><a href="meus-boletos.html" target="_blank">meus-boletos.html</a></li>
+        <li><a href="notificacoes-sistema.html" target="_blank">notificacoes-sistema.html</a></li>
+        <li><a href="ocorrencias.html" target="_blank">ocorrencias.html</a></li>
+        <li><a href="painel-financeiro.html" target="_blank">painel-financeiro.html</a></li>
+        <li><a href="painel-inadimplencia.html" target="_blank">painel-inadimplencia.html</a></li>
+        <li><a href="painel-manutencao.html" target="_blank">painel-manutencao.html</a></li>
+        <li><a href="painel-sindico.html" target="_blank">painel-sindico.html</a></li>
+        <li><a href="perfil-financeiro.html" target="_blank">perfil-financeiro.html</a></li>
+        <li><a href="perfil-morador.html" target="_blank">perfil-morador.html</a></li>
+        <li><a href="prestadores-servico.html" target="_blank">prestadores-servico.html</a></li>
+        <li><a href="protocolo-solicitacoes.html" target="_blank">protocolo-solicitacoes.html</a></li>
+        <li><a href="relatorios-financeiros.html" target="_blank">relatorios-financeiros.html</a></li>
+        <li><a href="solicitacoes-documentos.html" target="_blank">solicitacoes-documentos.html</a></li>
+        <li><a href="solicitacoes-gerente.html" target="_blank">solicitacoes-gerente.html</a></li>
+        <li><a href="visao-geral-comunicados.html" target="_blank">visao-geral-comunicados.html</a></li>
+        <li><a href="visao-geral-condominio.html" target="_blank">visao-geral-condominio.html</a></li>
+      </ul>
+    </section>
+
+    <!-- 5. Backend -->
+    <section id="backend">
+      <h2 class="section-title">5. Backend</h2>
+      <ul>
+        <li>Microserviços Spring Boot com API Gateway (Spring Cloud Gateway).</li>
+        <li>Autenticação JWT e autorização RBAC (Spring Security).</li>
+        <li>Persistência via Spring Data JPA + PostgreSQL, migrations com Flyway.</li>
+        <li>Mensageria RabbitMQ para eventos (pagamentos, notificações).</li>
+        <li>Configuração centralizada (Spring Cloud Config) e service discovery (Eureka).</li>
+      </ul>
+    </section>
+
+    <!-- 6. Frontend -->
+    <section id="frontend">
+      <h2 class="section-title">6. Frontend</h2>
+      <ul>
+        <li>Next.js com page &amp; app router, SSR/SSG e pré-fetching.</li>
+        <li>Styled-Components para theming e CSS-in-JS.</li>
+        <li>Context API para estado global (autenticação, preferências).</li>
+        <li>Axios centralizado em <code>src/services/api.ts</code>.</li>
+        <li>Testes unitários e de integração com Jest &amp; React Testing Library.</li>
+      </ul>
+    </section>
+
+    <!-- 7. API Contracts -->
+    <section id="api">
+      <h2 class="section-title">7. API Contracts</h2>
+      <p>
+        Documentação Swagger disponível em cada serviço em <code>/swagger-ui.html</code> e JSON em <code>/v3/api-docs</code>.  
+        O API Gateway consolida no endpoint <code>/actuator</code>.
+      </p>
+      <ul>
+        <li><code>POST /auth/login</code> — Gera JWT.</li>
+        <li><code>GET /condominio/{id}/unidades</code> — Lista unidades.</li>
+        <li><code>POST /comunicados</code> — Cria comunicado.</li>
+        <li><code>POST /finance/payments</code> — Registra pagamento.</li>
+      </ul>
+    </section>
+
+    <!-- 8. Integrações de Boletos -->
+    <section id="integration">
+      <h2 class="section-title">8. Integrações de Boletos</h2>
+
+      <h3>8.1 Gerencianet &amp; CobreBem</h3>
+      <ul>
+        <li>SDKs oficiais para emissão, consulta e cancelamento.</li>
+        <li>Webhook: <code>/finance/webhook</code> para atualização de status.</li>
+      </ul>
+
+      <h3>8.2 Itaú Automação</h3>
+      <ul>
+        <li>Certificado PJ: cadastro no Developer Portal Itaú.</li>
+        <li>Remessa CNAB240 e retorno com “nosso número”.</li>
+        <li>Configuração em Condomy: upload de certificado, Client ID/Secret.</li>
+      </ul>
+
+      <h3>8.3 Banco Inter Automação</h3>
+      <ul>
+        <li>Crie App no Internet Banking → permissões Cobrança &amp; Pix.</li>
+        <li>Upload de chaves e certificados em Condomy.</li>
+        <li>Tarifas mensais: até 30 boletos grátis, depois tarifa fixa por liquidação.</li>
+      </ul>
+    </section>
+
+    <!-- 9. CI/CD & Deploy -->
+    <section id="cicd">
+      <h2 class="section-title">9. CI/CD & Deploy</h2>
+      <ul>
+        <li>GitHub Actions: lint, build, testes e cobertura ≥ 80%.</li>
+        <li>Backend: image Docker → registry → deploy via Terraform em EKS.</li>
+        <li>Frontend: build Next.js → Vercel ou S3 + CloudFront.</li>
+        <li>Quality Gates: SonarCloud, scan de vulnerabilidades.</li>
+      </ul>
+    </section>
+
+    <!-- 10. Boas Práticas -->
+    <section id="best-practices">
+      <h2 class="section-title">10. Boas Práticas</h2>
+      <ul>
+        <li>Commits semânticos (Conventional Commits).</li>
+        <li>PR com code review obrigatório.</li>
+        <li>Lint &amp; Prettier no pre-commit (Husky).</li>
+        <li>Testes unitários e de integração em todos os serviços.</li>
+        <li>Swagger sempre atualizado.</li>
+        <li>Mock-screens antes de implementar UI.</li>
+      </ul>
+    </section>
+
+    <!-- 11. Glossário -->
+    <section id="glossary">
+      <h2 class="section-title">11. Glossário</h2>
+      <ul>
+        <li><strong>JWT:</strong> JSON Web Token para autenticação.</li>
+        <li><strong>RBAC:</strong> Controle de Acesso Baseado em Funções.</li>
+        <li><strong>SSR:</strong> Server-Side Rendering.</li>
+        <li><strong>SSG:</strong> Static-Site Generation.</li>
+        <li><strong>Webhook:</strong> Callback HTTP para eventos.</li>
+        <li><strong>CNAB240:</strong> Layout de remessa/retorno bancário.</li>
+        <li><strong>Micro-tenant:</strong> Isolamento de dados por cliente.</li>
+      </ul>
+    </section>
+
+    <!-- 12. Admin & Acessos -->
+    <section id="admin-access">
+      <h2 class="section-title">12. Administração Global & Gestão de Acessos</h2>
+
+      <h3>12.1 Papéis e Permissões</h3>
+      <ul>
+        <li><strong>Administrador Global</strong>: dono da plataforma. Cria condomínios, gerencia planos e acessos.</li>
+        <li><strong>Administrador de Condomínio (Síndico)</strong>: gerencia unidade, moradores e finanças do próprio condomínio.</li>
+        <li><strong>Morador</strong>: visualiza boletos, comunicados, reserva espaços e histórico financeiro.</li>
+      </ul>
+
+      <h3>12.2 Fluxo de Onboarding</h3>
+      <ol>
+        <li>Global Admin cria novo condomínio via portal interno.</li>
+        <li>Define dados básicos: nome, CNPJ, endereço, plano de assinatura.</li>
+        <li>Convidar Síndico por e-mail: gera link de registro seguro.</li>
+        <li>Síndico preenche cadastro, valida e ativa conta.</li>
+        <li>Após pagamento da assinatura (boleto ou cartão), plataforma libera total acesso.</li>
+      </ol>
+
+      <h3>12.3 Modelos de Assinatura</h3>
+      <ul>
+        <li><strong>Plano Básico</strong>: até 50 unidades — R$ 100/mês.</li>
+        <li><strong>Plano Profissional</strong>: até 200 unidades — R$ 250/mês.</li>
+        <li><strong>Plano Enterprise</strong>: ilimitado — valor sob consulta.</li>
+      </ul>
+
+      <h3>12.4 Dashboards & Métricas</h3>
+      <ul>
+        <li><strong>Global Admin Dashboard</strong>: MRR, número de condomínios ativos, churn, receita por plano.</li>
+        <li><strong>Condomínio Dashboard</strong>: inadimplência por unidade, fluxos de caixa, reservas e comunicação.</li>
+        <li>Alertas automáticos de planos prestes a vencer e inadimplência de condomínios.</li>
+      </ul>
+    </section>
+
+    <footer>
+      © 2025 Condomy — Documentação Completa.  
+      Mantenha este arquivo sempre atualizado para preservar a visão do produto.
+    </footer>
+
+  </main>
+</body>
+</html>
