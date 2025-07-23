@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Global | Condominium</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    header, footer {
+      background-color: #fff;
+      padding: 16px 24px;
+      border-bottom: 1px solid #ddd;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    main { padding: 24px; }
+    h2.section-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: #2b5dab;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background-color: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      font-size: 18px;
+      color: #2b5dab;
+    }
+    .card p {
+      font-size: 14px;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      margin-bottom: 32px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table th, .table td {
+      padding: 12px;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+    .table th {
+      background-color: #f0f4f8;
+      color: #555;
+    }
+
+    .chart-placeholder {
+      background-color: #e2e8f0;
+      height: 180px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      border-top: 1px solid #ddd;
+      padding: 16px 24px;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Condominium - Painel Global</h1>
+    <div>
+      <span>Administrador: você</span>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Resumo Financeiro</h2>
+    <div class="summary-grid">
+      <div class="card">
+        <h3>Receita Mensal</h3>
+        <p>R$ 12.480,00</p>
+      </div>
+      <div class="card">
+        <h3>Gastos Operacionais</h3>
+        <p>R$ 6.750,00</p>
+      </div>
+      <div class="card">
+        <h3>Lucro Líquido</h3>
+        <p>R$ 5.730,00</p>
+      </div>
+      <div class="card">
+        <h3>Condomínios Cadastrados</h3>
+        <p>16 (13 ativos / 3 inativos)</p>
+      </div>
+    </div>
+
+    <div class="chart-placeholder">[Gráfico de evolução da receita - mockado]</div>
+
+    <h2 class="section-title">Condomínios na plataforma</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Plano</th>
+          <th>Último pagamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Condomínio Águas Claras</td>
+          <td>🟢 Ativo</td>
+          <td>Premium</td>
+          <td>R$ 890,00 - 05/07</td>
+        </tr>
+        <tr>
+          <td>Residencial Sol Nascente</td>
+          <td>🔴 Inativo</td>
+          <td>Básico</td>
+          <td>R$ 490,00 - 20/06</td>
+        </tr>
+        <tr>
+          <td>EcoPark Vila Verde</td>
+          <td>🟢 Ativo</td>
+          <td>Pro</td>
+          <td>R$ 680,00 - 01/07</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section-title">Custos Operacionais Detalhados</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Descrição</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Infraestrutura</td>
+          <td>Servidores e backup</td>
+          <td>R$ 2.300,00</td>
+        </tr>
+        <tr>
+          <td>Equipe</td>
+          <td>Desenvolvimento e suporte</td>
+          <td>R$ 3.100,00</td>
+        </tr>
+        <tr>
+          <td>Serviços externos</td>
+          <td>APIs, domínio e licenças</td>
+          <td>R$ 1.350,00</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    &copy; 2025 Condominium. Todos os direitos reservados.
+  </footer>
+</body>
+</html>

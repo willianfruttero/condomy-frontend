@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solicitações de Documentos</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #f7f9fc; padding: 20px; color: #333; }
+    h1 { font-size: 24px; margin-bottom: 25px; }
+
+    .formulario { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 30px; }
+    .formulario h2 { font-size: 20px; margin-bottom: 15px; }
+    .formulario input, .formulario select, .formulario textarea {
+      width: 100%; padding: 10px; margin-bottom: 15px;
+      border-radius: 6px; border: 1px solid #ccc; font-size: 14px;
+    }
+    .formulario button {
+      background: #27ae60; color: white; padding: 10px 16px;
+      border: none; border-radius: 6px; cursor: pointer;
+      font-size: 14px;
+    }
+
+    .lista-solicitacoes {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;
+    }
+
+    .card {
+      background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 16px; display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .card h3 { font-size: 18px; margin-bottom: 5px; }
+    .card span { font-size: 14px; color: #555; }
+    .status {
+      font-weight: bold; font-size: 13px; padding: 4px 8px; border-radius: 4px;
+      width: fit-content; margin-top: 5px;
+    }
+
+    .pendente { background: #fef4e5; color: #e67e22; }
+    .respondido { background: #eafaf1; color: #27ae60; }
+    .concluido { background: #d5d8dc; color: #7f8c8d; }
+
+    .acoes {
+      margin-top: 10px; display: flex; gap: 10px;
+    }
+
+    .acoes button {
+      font-size: 13px; padding: 8px 12px; border: none; border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-editar { background: #3498db; color: white; }
+    .btn-cancelar { background: #e74c3c; color: white; }
+
+    @media (max-width: 500px) {
+      .formulario, .lista-solicitacoes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>📮 Solicitações de Documentos</h1>
+
+  <div class="formulario">
+    <h2>Nova Solicitação</h2>
+    <select>
+      <option>Tipo de documento</option>
+      <option>Segunda via de boleto</option>
+      <option>Ata de reunião</option>
+      <option>Contrato de locação</option>
+      <option>Atualização cadastral</option>
+    </select>
+    <select>
+      <option>Bloco</option>
+      <option>Bloco A</option>
+      <option>Bloco B</option>
+    </select>
+    <textarea rows="4" placeholder="Descrição ou motivo da solicitação..."></textarea>
+    <button>Enviar solicitação</button>
+  </div>
+
+  <h2 style="margin-bottom: 15px;">🗂️ Histórico de Solicitações</h2>
+
+  <div class="lista-solicitacoes">
+    <div class="card">
+      <h3>Segunda via - Boleto Julho</h3>
+      <span>Enviado: 16/07/2025</span>
+      <span>Bloco B</span>
+      <span class="status pendente">Pendente</span>
+      <div class="acoes">
+        <button class="btn-editar">Editar</button>
+        <button class="btn-cancelar">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Ata reunião 10/06</h3>
+      <span>Respondido: 12/07/2025</span>
+      <span>Bloco A</span>
+      <span class="status respondido">Respondido</span>
+    </div>
+
+    <div class="card">
+      <h3>Contrato locação antigo</h3>
+      <span>Finalizado: 09/07/2025</span>
+      <span>Bloco B</span>
+      <span class="status concluido">Concluído</span>
+    </div>
+  </div>
+</body>
+</html>
