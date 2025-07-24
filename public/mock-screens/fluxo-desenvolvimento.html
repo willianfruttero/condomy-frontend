@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Meta básicas -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Título -->
+  <title>Condomy – Fluxo de Desenvolvimento</title>
+  <!-- CSS inline para o fluxograma -->
+  <style>
+    /* Estilos básicos do fluxograma */
+    .flowchart { display: flex; flex-direction: column; align-items: center; }
+    .step { 
+      border: 2px solid #4A90E2; 
+      border-radius: 8px; 
+      padding: 16px; 
+      margin: 12px;
+      width: 80%;
+      max-width: 600px;
+      background: #F0F8FF;
+    }
+    .arrow {
+      font-size: 2em;
+      color: #4A90E2;
+      margin: -8px 0;
+    }
+    /* Mapa de lógica x UI x estilo */
+    .map { 
+      margin-top: 32px; 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 12px;
+    }
+    .map div {
+      border: 1px dashed #999;
+      padding: 8px;
+      background: #FBFBFB;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fluxo de Desenvolvimento da Plataforma</h1>
+    <p>Passo a passo desde protótipos HTML até a versão final em React + TypeScript.</p>
+  </header>
+
+  <div class="flowchart">
+    <!-- Passo 1 -->
+    <div class="step">
+      <h2>1. Criação dos Protótipos HTML</h2>
+      <ul>
+        <li>Esqueleto HTML básico com semântica (&lt;header&gt;, &lt;main&gt;, &lt;footer&gt;).</li>
+        <li>CSS mínimo para layout estagnado (reset e grid simples).</li>
+        <li>Comentários explicativos em cada tag.</li>
+      </ul>
+    </div>
+    <div class="arrow">↓</div>
+
+    <!-- Passo 2 -->
+    <div class="step">
+      <h2>2. Revisão e Aprovação</h2>
+      <ul>
+        <li>Time de UI/UX ajusta cores e espaçamentos.</li>
+        <li>Stakeholders confirmam fluxo de navegação.</li>
+        <li>Validação de acessibilidade e responsividade básica.</li>
+      </ul>
+    </div>
+    <div class="arrow">↓</div>
+
+    <!-- Passo 3 -->
+    <div class="step">
+      <h2>3. Migração para React + TypeScript</h2>
+      <ul>
+        <li>Cada HTML vira um componente JSX.</li>
+        <li>Props tipadas com interfaces ou types.</li>
+        <li>Camada de estilo via Styled-Components ou Tailwind.</li>
+        <li>Testes unitários com Jest + React Testing Library.</li>
+      </ul>
+    </div>
+    <div class="arrow">↓</div>
+
+    <!-- Passo 4 -->
+    <div class="step">
+      <h2>4. UI/UX Avançado e Responsividade</h2>
+      <ul>
+        <li>Media queries e breakpoints no Tailwind.</li>
+        <li>Testes manuais em dispositivos reais.</li>
+        <li>Animações suaves com framer-motion (opcional).</li>
+      </ul>
+    </div>
+    <div class="arrow">↓</div>
+
+    <!-- Passo 5 -->
+    <div class="step">
+      <h2>5. Deploy e Monitoramento</h2>
+      <ul>
+        <li>Pipelines CI/CD (GitHub Actions) para build e testes.</li>
+        <li>Deploy incremental em staging e produção (EKS, Vercel, CloudFront).</li>
+        <li>Monitoramento com Prometheus, ELK e alertas no Slack/PagerDuty.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mapa lógico x UI x Estilo -->
+  <section class="map">
+    <div>
+      <h3>Lógica</h3>
+      <p>Funções, validações, chamadas API e tratamento de dados.</p>
+    </div>
+    <div>
+      <h3>UI/UX</h3>
+      <p>Componentes, hierarquia visual, acessibilidade e fluxos.</p>
+    </div>
+    <div>
+      <h3>Estilo</h3>
+      <p>Cores, tipografia, espaçamentos, responsividade e animações.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Condomy – Fluxo de desenvolvimento documentado.</p>
+  </footer>
+</body>
+</html>
