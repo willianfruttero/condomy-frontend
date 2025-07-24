@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "react-scripts build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -17,13 +17,20 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "cheerio": "^1.1.2",
-    "eslint": "^9",
+    "eslint": "^9.31.0",
     "eslint-config-next": "15.4.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "jest": "^30.0.5",
     "tailwindcss": "^4",
+    "ts-jest": "^29.4.0",
     "typescript": "^5"
   }
 }
