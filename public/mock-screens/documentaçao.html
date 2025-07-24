@@ -1,299 +1,397 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Condomy — Documentação Completa & Arquitetura</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Condomy – Documentação Completa</title>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI',sans-serif; background:#f7f8fa; color:#333; }
-    a { color:#1a73e8; text-decoration:none; }
-    a:hover { text-decoration:underline; }
+    :root {
+      --primary: #004d99;
+      --secondary: #3273dc;
+      --bg: #f5f5f5;
+      --surface: #fff;
+      --text: #333;
+      --muted: #666;
+      --sidebar-width: 280px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { height: 100%; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
 
-    header { background:#1a73e8; color:#fff; padding:1rem; position:fixed;
-             top:0; left:0; width:100%; z-index:1000; }
-    header h1 { font-size:1.8rem; }
-    header p { margin-top:.25rem; font-size:.9rem; }
+    /* SIDEBAR */
+    aside.sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sidebar-width); height: 100%;
+      background: var(--primary); color: white;
+      overflow-y: auto; padding: 1.5em 1em;
+    }
+    aside.sidebar h2 {
+      font-size: 1.4em; margin-bottom: .8em;
+      border-bottom: 1px solid rgba(255,255,255,.3);
+      padding-bottom: .4em;
+    }
+    .sidebar-section { margin-top: 1.5em; }
+    .sidebar-section ul { list-style: none; margin-top: .5em; }
+    .sidebar-section li { margin: .4em 0; }
+    .sidebar-section a {
+      color: white; text-decoration: none; font-size: .95em;
+      display: block; padding: .3em .6em; border-radius: 4px;
+    }
+    .sidebar-section a:hover,
+    .sidebar-section a.active {
+      background: rgba(255,255,255,.2);
+    }
 
-    nav { position:fixed; top:72px; left:0; bottom:0; width:240px;
-          background:#fff; border-right:1px solid #ddd; overflow-y:auto;
-          padding:1rem; }
-    nav ul { list-style:none; }
-    nav li { margin:.5rem 0; }
-    nav a { display:block; padding:.5rem; border-radius:4px; }
-    nav a.active, nav a:hover { background:#e8f0fe; }
+    /* MAIN CONTENT */
+    .main {
+      margin-left: var(--sidebar-width); padding: 2em;
+    }
+    section.doc-section { margin-bottom: 3em; }
+    section.doc-section h2 { color: var(--primary); margin-bottom: .5em; }
+    section.doc-section p { margin-bottom: 1em; line-height: 1.5; }
+    section.doc-section ul,
+    section.doc-section ol { margin: .8em 0 1em 1.2em; }
+    section.doc-section table {
+      width: 100%; border-collapse: collapse; margin: 1em 0;
+      background: var(--surface);
+    }
+    section.doc-section table th,
+    section.doc-section table td {
+      border: 1px solid #ccc; padding: .6em; text-align: left;
+    }
+    section.doc-section code { background: #eee; padding: .2em .4em; }
 
-    main { margin:80px 2rem 2rem 260px; }
-    section { margin-bottom:3rem; }
-    .section-title { font-size:1.5rem; color:#1a73e8;
-                     border-bottom:2px solid #e0e0e0;
-                     padding-bottom:.5rem; margin-bottom:1rem; }
-
-    pre { background:#eef2f7; padding:1rem; overflow:auto; border-radius:4px; }
-    code { font-family:monospace; }
-
-    ul.files-list { list-style:none; padding-left:0; }
-    ul.files-list li { margin:.3rem 0; }
-
-    footer { text-align:center; padding:1rem; border-top:1px solid #ddd;
-             margin-top:4rem; color:#777; font-size:.9rem; }
+    /* MOCK SCREEN PREVIEW */
+    #screen-preview {
+      display: none; border: 1px solid #ccc;
+      background: white; padding: 1em; margin-bottom: 2em;
+      max-height: 70vh; overflow-y: auto;
+    }
+    #screen-preview .toolbar {
+      text-align: right; margin-bottom: .5em;
+    }
+    #screen-preview .toolbar button {
+      background: var(--secondary); color: white;
+      border: none; padding: .4em .8em; border-radius: 4px;
+      cursor: pointer;
+    }
+    #screen-preview .toolbar button:hover {
+      background: var(--primary);
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>Condomy Documentation</h1>
-    <p>Arquitetura, Mock-Screens, Integrações e Gestão de Acessos</p>
-  </header>
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <h2>Condomy Docs</h2>
 
-  <!-- Sidebar -->
-  <nav>
-    <ul>
-      <li><a href="#overview">1. Visão Geral</a></li>
-      <li><a href="#stack">2. Stack Tecnológico</a></li>
-      <li><a href="#structure">3. Estrutura de Pastas</a></li>
-      <li><a href="#mocks" class="active">4. Mock-Screens &amp; UI</a></li>
-      <li><a href="#backend">5. Backend</a></li>
-      <li><a href="#frontend">6. Frontend</a></li>
-      <li><a href="#api">7. API Contracts</a></li>
-      <li><a href="#integration">8. Integrações de Boletos</a></li>
-      <li><a href="#cicd">9. CI/CD &amp; Deploy</a></li>
-      <li><a href="#best-practices">10. Boas Práticas</a></li>
-      <li><a href="#glossary">11. Glossário</a></li>
-      <li><a href="#admin-access">12. Admin &amp; Acessos</a></li>
-    </ul>
-  </nav>
+    <div class="sidebar-section">
+      <h2>Seções</h2>
+      <ul>
+        <li><a href="#visao-geral" class="doc-link">1. Visão Geral</a></li>
+        <li><a href="#stack" class="doc-link">2. Stack Tecnológico</a></li>
+        <li><a href="#estrutura-pastas" class="doc-link">3. Estrutura de Pastas</a></li>
+        <li><a href="#mock-screens" class="doc-link">4. Mock-Screens & UI</a></li>
+        <li><a href="#backend" class="doc-link">5. Backend</a></li>
+        <li><a href="#frontend" class="doc-link">6. Frontend</a></li>
+        <li><a href="#api-contracts" class="doc-link">7. API Contracts</a></li>
+        <li><a href="#integracoes-boletos" class="doc-link">8. Integrações de Boletos</a></li>
+        <li><a href="#cicd" class="doc-link">9. CI/CD & Deploy</a></li>
+        <li><a href="#boas-praticas" class="doc-link">10. Boas Práticas</a></li>
+        <li><a href="#glossario" class="doc-link">11. Glossário</a></li>
+        <li><a href="#admin-access" class="doc-link">12. Admin & Acessos</a></li>
+      </ul>
+    </div>
 
-  <main>
+    <div class="sidebar-section">
+      <h2>Mock-Screens</h2>
+      <ul>
+        <li><a href="#" data-screen="mock-screens/agenda-comunicados.html">agenda-comunicados.html</a></li>
+        <li><a href="#" data-screen="mock-screens/agenda-servicos.html">agenda-servicos.html</a></li>
+        <li><a href="#" data-screen="mock-screens/boletos-e-pagamentos.html">boletos-e-pagamentos.html</a></li>
+        <li><a href="#" data-screen="mock-screens/cadastro-comunicados.html">cadastro-comunicados.html</a></li>
+        <li><a href="#" data-screen="mock-screens/cadastro-fornecedores.html">cadastro-fornecedores.html</a></li>
+        <li><a href="#" data-screen="mock-screens/cadastro-unidade.html">cadastro-unidade.html</a></li>
+        <li><a href="#" data-screen="mock-screens/condominios-gerenciador.html">condominios-gerenciador.html</a></li>
+        <li><a href="#" data-screen="mock-screens/dashboard-admin-global.html">dashboard-admin-global.html</a></li>
+        <li><a href="#" data-screen="mock-screens/documentos-condominio.html">documentos-condominio.html</a></li>
+        <li><a href="#" data-screen="mock-screens/estatisticas-comunicados.html">estatisticas-comunicados.html</a></li>
+        <li><a href="#" data-screen="mock-screens/eventos-condominio.html">eventos-condominio.html</a></li>
+        <li><a href="#" data-screen="mock-screens/financeiro-condominio.html">financeiro-condominio.html</a></li>
+        <li><a href="#" data-screen="mock-screens/fornecedores-visualizacao.html">fornecedores-visualizacao.html</a></li>
+        <li><a href="#" data-screen="mock-screens/historico-envios.html">historico-envios.html</a></li>
+        <li><a href="#" data-screen="mock-screens/historico-financeiro.html">historico-financeiro.html</a></li>
+        <li><a href="#" data-screen="mock-screens/indicadores-condominio.html">indicadores-condominio.html</a></li>
+        <li><a href="#" data-screen="mock-screens/leitura-comunicado.html">leitura-comunicado.html</a></li>
+        <li><a href="#" data-screen="mock-screens/login.html">login.html</a></li>
+        <li><a href="#" data-screen="mock-screens/meus-boletos.html">meus-boletos.html</a></li>
+        <li><a href="#" data-screen="mock-screens/notificacoes-sistema.html">notificacoes-sistema.html</a></li>
+        <li><a href="#" data-screen="mock-screens/ocorrencias.html">ocorrencias.html</a></li>
+        <li><a href="#" data-screen="mock-screens/painel-financeiro.html">painel-financeiro.html</a></li>
+        <li><a href="#" data-screen="mock-screens/painel-inadimplencia.html">painel-inadimplencia.html</a></li>
+        <li><a href="#" data-screen="mock-screens/painel-manutencao.html">painel-manutencao.html</a></li>
+        <li><a href="#" data-screen="mock-screens/painel-sindico.html">painel-sindico.html</a></li>
+        <li><a href="#" data-screen="mock-screens/perfil-financeiro.html">perfil-financeiro.html</a></li>
+        <li><a href="#" data-screen="mock-screens/perfil-morador.html">perfil-morador.html</a></li>
+        <li><a href="#" data-screen="mock-screens/prestadores-servico.html">prestadores-servico.html</a></li>
+        <li><a href="#" data-screen="mock-screens/protocolo-solicitacoes.html">protocolo-solicitacoes.html</a></li>
+        <li><a href="#" data-screen="mock-screens/relatorios-financeiros.html">relatorios-financeiros.html</a></li>
+        <li><a href="#" data-screen="mock-screens/solicitacoes-documentos.html">solicitacoes-documentos.html</a></li>
+        <li><a href="#" data-screen="mock-screens/solicitacoes-gerente.html">solicitacoes-gerente.html</a></li>
+        <li><a href="#" data-screen="mock-screens/visao-geral-comunicados.html">visao-geral-comunicados.html</a></li>
+        <li><a href="#" data-screen="mock-screens/visao-geral-condominio.html">visao-geral-condominio.html</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <!-- MOCKSCREEN PREVIEW -->
+    <div id="screen-preview">
+      <div class="toolbar">
+        <button id="close-preview">Voltar à Documentação</button>
+      </div>
+      <div id="screen-content"></div>
+    </div>
 
     <!-- 1. Visão Geral -->
-    <section id="overview">
-      <h2 class="section-title">1. Visão Geral</h2>
-      <p>Condomy é a plataforma SaaS multi-tenant para gestão completa de condomínios:</p>
+    <section id="visao-geral" class="doc-section">
+      <h2>1. Visão Geral</h2>
+      <p>
+        Condomy é uma plataforma SaaS multi-tenant que centraliza:
+      </p>
       <ul>
-        <li>Administração financeira e emissão de boletos;</li>
-        <li>Comunicação interna entre moradores;</li>
-        <li>Reservas de áreas comuns;</li>
-        <li>Dashboards e relatórios de performance.</li>
+        <li>Administração financeira e emissão de boletos</li>
+        <li>Comunicação interna entre moradores</li>
+        <li>Reservas de áreas comuns</li>
+        <li>Dashboards e relatórios de performance</li>
       </ul>
     </section>
 
     <!-- 2. Stack Tecnológico -->
-    <section id="stack">
-      <h2 class="section-title">2. Stack Tecnológico</h2>
-      <ul>
-        <li><strong>Frontend:</strong> Next.js (SSR/SSG), React 18, TypeScript, Styled-Components, Tailwind CSS, Vite, React Query, React Hook Form, Zod, Axios, Lucide React, Chart.js, TanStack Table</li>
-        <li><strong>Backend:</strong> Java 17, Spring Boot 3, Spring Cloud Gateway/Config, Spring Data JPA + PostgreSQL, RabbitMQ, Swagger/OpenAPI</li>
-        <li><strong>Infraestrutura:</strong> Docker, Docker Compose, Kubernetes (EKS), AWS (EC2, RDS, S3), Terraform</li>
-        <li><strong>CI/CD & Observabilidade:</strong> GitHub Actions, SonarCloud, ELK Stack, Prometheus + Grafana</li>
-      </ul>
+    <section id="stack" class="doc-section">
+      <h2>2. Stack Tecnológico</h2>
+      <p>Frontend: Next.js, React 18, TypeScript, Tailwind CSS, Styled-Components, Vite, React Query, React Hook Form, Zod, Axios, Chart.js, TanStack Table</p>
+      <p>Backend: Java 17, Spring Boot 3, Spring Cloud Gateway/Config, Spring Data JPA, PostgreSQL, RabbitMQ, Swagger/OpenAPI</p>
+      <p>Infra: Docker, Kubernetes (EKS), AWS (EC2, RDS, S3), Terraform; CI/CD: GitHub Actions, SonarCloud; Observabilidade: ELK, Prometheus + Grafana</p>
     </section>
 
     <!-- 3. Estrutura de Pastas -->
-    <section id="structure">
-      <h2 class="section-title">3. Estrutura de Pastas</h2>
-
-      <h3>Backend Monorepo</h3>
-      <pre><code>
+    <section id="estrutura-pastas" class="doc-section">
+      <h2>3. Estrutura de Pastas</h2>
+      <pre>
 /condomy-backend
 ├─ api-gateway/
 ├─ auth-service/
 ├─ condominium-service/
 ├─ communication-service/
 ├─ finance-service/
-├─ common-lib/            (DTOs e utilitários compartilhados)
-├─ infra/terraform/
-└─ scripts/start-all.sh
-      </code></pre>
+├─ common-lib/
+└─ infra/terraform/
 
-      <h3>Frontend Next.js</h3>
-      <pre><code>
 /condomy-frontend
-├─ public/
-│  ├─ favicon.ico
-│  └─ mock-screens/       (HTML protótipos listados abaixo)
-├─ scripts/
-│  └─ generate-mocks.js
+├─ public/mock-screens/
+├─ scripts/generate-mocks.js
 └─ src/
-   ├─ app/                (rotas, layouts, páginas)
-   ├─ components/         (UI reutilizável)
-   ├─ hooks/              (custom hooks)
-   ├─ services/           (api.ts – cliente Axios)
-   ├─ styles/             (globals.css, temas)
-   └─ utils/              (formatDate.ts, validators.ts)
-      </code></pre>
+   ├─ app/
+   ├─ components/
+   ├─ hooks/
+   ├─ services/
+   ├─ styles/
+   └─ utils/
+      </pre>
     </section>
 
     <!-- 4. Mock-Screens & UI -->
-    <section id="mocks">
-      <h2 class="section-title">4. Mock-Screens &amp; UI Prototypes</h2>
-      <p>Todos os protótipos em <code>public/mock-screens</code> serão usados como exemplos para construir os componentes React. Clique para abrir cada um:</p>
-      <ul class="files-list">
-        <li><a href="agenda-comunicados.html" target="_blank">agenda-comunicados.html</a></li>
-        <li><a href="agenda-servicos.html" target="_blank">agenda-servicos.html</a></li>
-        <li><a href="boletos-e-pagamentos.html" target="_blank">boletos-e-pagamentos.html</a></li>
-        <li><a href="cadastro-comunicados.html" target="_blank">cadastro-comunicados.html</a></li>
-        <li><a href="cadastro-fornecedores.html" target="_blank">cadastro-fornecedores.html</a></li>
-        <li><a href="cadastro-unidade.html" target="_blank">cadastro-unidade.html</a></li>
-        <li><a href="condominios-gerenciador.html" target="_blank">condominios-gerenciador.html</a></li>
-        <li><a href="dashboard-admin-global.html" target="_blank">dashboard-admin-global.html</a></li>
-        <li><a href="documentos-condominio.html" target="_blank">documentos-condominio.html</a></li>
-        <li><a href="estatisticas-comunicados.html" target="_blank">estatisticas-comunicados.html</a></li>
-        <li><a href="eventos-condominio.html" target="_blank">eventos-condominio.html</a></li>
-        <li><a href="financeiro-condominio.html" target="_blank">financeiro-condominio.html</a></li>
-        <li><a href="fornecedores-visualizacao.html" target="_blank">fornecedores-visualizacao.html</a></li>
-        <li><a href="historico-envios.html" target="_blank">historico-envios.html</a></li>
-        <li><a href="historico-financeiro.html" target="_blank">historico-financeiro.html</a></li>
-        <li><a href="indicadores-condominio.html" target="_blank">indicadores-condominio.html</a></li>
-        <li><a href="leitura-comunicado.html" target="_blank">leitura-comunicado.html</a></li>
-        <li><a href="login.html" target="_blank">login.html</a></li>
-        <li><a href="meus-boletos.html" target="_blank">meus-boletos.html</a></li>
-        <li><a href="notificacoes-sistema.html" target="_blank">notificacoes-sistema.html</a></li>
-        <li><a href="ocorrencias.html" target="_blank">ocorrencias.html</a></li>
-        <li><a href="painel-financeiro.html" target="_blank">painel-financeiro.html</a></li>
-        <li><a href="painel-inadimplencia.html" target="_blank">painel-inadimplencia.html</a></li>
-        <li><a href="painel-manutencao.html" target="_blank">painel-manutencao.html</a></li>
-        <li><a href="painel-sindico.html" target="_blank">painel-sindico.html</a></li>
-        <li><a href="perfil-financeiro.html" target="_blank">perfil-financeiro.html</a></li>
-        <li><a href="perfil-morador.html" target="_blank">perfil-morador.html</a></li>
-        <li><a href="prestadores-servico.html" target="_blank">prestadores-servico.html</a></li>
-        <li><a href="protocolo-solicitacoes.html" target="_blank">protocolo-solicitacoes.html</a></li>
-        <li><a href="relatorios-financeiros.html" target="_blank">relatorios-financeiros.html</a></li>
-        <li><a href="solicitacoes-documentos.html" target="_blank">solicitacoes-documentos.html</a></li>
-        <li><a href="solicitacoes-gerente.html" target="_blank">solicitacoes-gerente.html</a></li>
-        <li><a href="visao-geral-comunicados.html" target="_blank">visao-geral-comunicados.html</a></li>
-        <li><a href="visao-geral-condominio.html" target="_blank">visao-geral-condominio.html</a></li>
-      </ul>
+    <section id="mock-screens" class="doc-section">
+      <h2>4. Mock-Screens & UI Prototypes</h2>
+      <p>
+        Utilize estes protótipos HTML como referência para desenvolver os componentes React.
+        Clique em qualquer nome de arquivo ao lado para visualizar sem sair desta página.
+      </p>
+      <p>
+        <strong>Como funciona:</strong>
+        o painel acima carrega a tela clicada em uma DIV, via fetch.
+      </p>
     </section>
 
     <!-- 5. Backend -->
-    <section id="backend">
-      <h2 class="section-title">5. Backend</h2>
+    <section id="backend" class="doc-section">
+      <h2>5. Backend</h2>
       <ul>
-        <li>Monorepo de microserviços Spring Boot (api-gateway, auth, condominium, communication, finance).</li>
-        <li>common-lib para DTOs e utilitários compartilhados.</li>
-        <li>JWT + RBAC (Spring Security) e validações com Zod no frontend.</li>
-        <li>Persistência PostgreSQL + Flyway e mensageria RabbitMQ.</li>
-        <li>Configuração central (Spring Cloud Config) e discovery via Eureka.</li>
+        <li>Microserviços Spring Boot: gateway, auth, condomínio, comunicação, financeiro</li>
+        <li>common-lib: DTOs e utilitários compartilhados</li>
+        <li>Segurança: JWT + RBAC (Spring Security); validação adicional com Zod no front</li>
+        <li>Persistência: PostgreSQL + Flyway; mensageria RabbitMQ</li>
+        <li>Configuração central: Spring Cloud Config + Eureka</li>
       </ul>
     </section>
 
     <!-- 6. Frontend -->
-    <section id="frontend">
-      <h2 class="section-title">6. Frontend</h2>
+    <section id="frontend" class="doc-section">
+      <h2>6. Frontend</h2>
       <ul>
-        <li>Next.js (app &amp; page router) com SSR/SSG e prefetching.</li>
-        <li>React 18 + TypeScript + Styled-Components + Tailwind CSS.</li>
-        <li>State global via Context API (AuthContext, SidebarContext, NotificationContext).</li>
-        <li>Fetch &amp; cache com React Query; formulários com React Hook Form + Zod.</li>
-        <li>Testes unitários e de integração (Jest, React Testing Library).</li>
+        <li>Next.js (app router & SSR/SSG) com prefetching</li>
+        <li>React 18, TypeScript, Tailwind CSS, Styled-Components</li>
+        <li>Estado: Context API (Auth, Sidebar, Notificações)</li>
+        <li>Data fetching: React Query; Formulários: React Hook Form + Zod</li>
+        <li>Teste: Jest + React Testing Library</li>
       </ul>
     </section>
 
     <!-- 7. API Contracts -->
-    <section id="api">
-      <h2 class="section-title">7. API Contracts</h2>
-      <p>Swagger UI em cada serviço: <code>/swagger-ui.html</code>; JSON em <code>/v3/api-docs</code>. Gateway consolida em <code>/actuator</code>.</p>
+    <section id="api-contracts" class="doc-section">
+      <h2>7. API Contracts</h2>
+      <p>
+        Documentação Swagger em cada serviço (/swagger-ui.html) e JSON (/v3/api-docs).  
+        Gateway consolida endpoints em /actuator.
+      </p>
       <ul>
-        <li><code>POST /auth/login</code> — retorna JWT.</li>
-        <li><code>GET /condominio/{id}/unidades</code> — lista unidades.</li>
-        <li><code>POST /comunicados</code> — cria comunicado.</li>
-        <li><code>POST /finance/payments</code> — registra pagamento.</li>
+        <li>POST /auth/login – Retorna JWT</li>
+        <li>GET /condominio/{id}/unidades – Lista unidades</li>
+        <li>POST /comunicados – Cria novo comunicado</li>
+        <li>POST /finance/payments – Registra pagamento</li>
       </ul>
     </section>
 
     <!-- 8. Integrações de Boletos -->
-    <section id="integration">
-      <h2 class="section-title">8. Integrações de Boletos</h2>
-      <h3>Gerencianet &amp; CobreBem</h3>
+    <section id="integracoes-boletos" class="doc-section">
+      <h2>8. Integrações de Boletos</h2>
       <ul>
-        <li>SDKs para emissão, consulta, cancelamento e webhooks em <code>/finance/webhook</code>.</li>
-      </ul>
-      <h3>Itaú Automação</h3>
-      <ul>
-        <li>Certificado PJ e credenciais no Developer Portal Itaú.</li>
-        <li>Remessa CNAB240 e retorno “nosso número”.</li>
-      </ul>
-      <h3>Banco Inter Automação</h3>
-      <ul>
-        <li>App no Internet Banking (Cobrança, Pix), upload de chaves/certificados.</li>
-        <li>Até 30 boletos grátis; tarifa por liquidação a partir daí.</li>
+        <li>Gerencianet & CobreBem: emissão, consulta, cancelamento, webhooks em /finance/webhook</li>
+        <li>Itaú: CNAB240, certificado PJ, retorno “nosso número”</li>
+        <li>Banco Inter: cobranças, Pix, upload de chaves/certificados</li>
       </ul>
     </section>
 
     <!-- 9. CI/CD & Deploy -->
-    <section id="cicd">
-      <h2 class="section-title">9. CI/CD &amp; Deploy</h2>
+    <section id="cicd" class="doc-section">
+      <h2>9. CI/CD & Deploy</h2>
       <ul>
-        <li>GitHub Actions: lint, build, testes, coverage ≥ 80%.</li>
-        <li>Backend: Docker → registry → Terraform → EKS.</li>
-        <li>Frontend: Next.js → Vercel ou S3 + CloudFront.</li>
-        <li>Quality Gates: SonarCloud, scan de vulnerabilidades.</li>
+        <li>GitHub Actions: lint, build, testes (coverage ≥ 80%)</li>
+        <li>Backend → Docker → Registry → Terraform → EKS</li>
+        <li>Frontend → Vercel ou S3 + CloudFront</li>
+        <li>Quality Gates: SonarCloud, análise de vulnerabilidades</li>
       </ul>
     </section>
 
     <!-- 10. Boas Práticas -->
-    <section id="best-practices">
-      <h2 class="section-title">10. Boas Práticas</h2>
+    <section id="boas-praticas" class="doc-section">
+      <h2>10. Boas Práticas</h2>
       <ul>
-        <li>Commits semânticos (Conventional Commits).</li>
-        <li>Pull request com code review obrigatório e branches protegidos.</li>
-        <li>Lint &amp; Prettier no pre-commit (Husky).</li>
-        <li>Testes unitários e de integração em todos os serviços.</li>
-        <li>Swagger sempre atualizado e disponível no pipeline.</li>
-        <li>Mock-screens para validar UI antes da implementação.</li>
+        <li>Commits semânticos (Conventional Commits)</li>
+        <li>Pull Requests com code review obrigatório</li>
+        <li>Lint & Prettier via Husky no pre-commit</li>
+        <li>Testes unitários e integração em todos serviços</li>
+        <li>Swagger atualizado e disponível em pipeline</li>
+        <li>Validação de UI com mock-screens antes da implementação</li>
       </ul>
     </section>
 
     <!-- 11. Glossário -->
-    <section id="glossary">
-      <h2 class="section-title">11. Glossário</h2>
+    <section id="glossario" class="doc-section">
+      <h2>11. Glossário</h2>
       <ul>
-        <li><strong>JWT:</strong> JSON Web Token para autenticação.</li>
-        <li><strong>RBAC:</strong> Controle de Acesso Baseado em Funções.</li>
-        <li><strong>SSR:</strong> Server-Side Rendering.</li>
-        <li><strong>SSG:</strong> Static-Site Generation.</li>
-        <li><strong>Webhook:</strong> Callback HTTP para eventos em tempo real.</li>
-        <li><strong>CNAB240:</strong> Layout de remessa/retorno bancário.</li>
-        <li><strong>Micro-tenant:</strong> Isolamento de dados por cliente.</li>
+        <li>JWT: JSON Web Token</li>
+        <li>RBAC: Role-Based Access Control</li>
+        <li>SSR: Server-Side Rendering</li>
+        <li>SSG: Static-Site Generation</li>
+        <li>Webhook: Callback HTTP para eventos</li>
+        <li>CNAB240: Layout bancário de remessa/retorno</li>
+        <li>Multi-tenant: Isolamento de dados por cliente</li>
       </ul>
     </section>
 
-    <!-- 12. Admin & Acessos -->
-    <section id="admin-access">
-      <h2 class="section-title">12. Administração Global &amp; Gestão de Acessos</h2>
-      <h3>Papéis</h3>
+    <!-- 12. Administração Global & Acessos -->
+    <section id="admin-access" class="doc-section">
+      <h2>12. Administração Global & Gestão de Acessos</h2>
+
+      <h3>Papéis e Hierarquia</h3>
       <ul>
-        <li><strong>Administrador Global:</strong> dono da plataforma; cria condomínios, define planos e libera acessos.</li>
-        <li><strong>Síndico (Admin de Condomínio):</strong> gerencia residentes, finanças e comunicação do próprio condomínio.</li>
-        <li><strong>Morador:</strong> consome comunicados, boletos, reservas e histórico financeiro.</li>
+        <li>Administrador Global: dono da plataforma, cria condomínios, define planos e integrações</li>
+        <li>Síndico (Admin Cond.): gerencia residentes, finanças e comunicados do próprio condomínio</li>
+        <li>Gerente de Área: supervisão de reservas, manutenção e prestadores</li>
+        <li>Moderador/Colaborador: pode criar comunicados, solicitações e gerenciar documentos</li>
+        <li>Morador: acesso de leitura; acompanha boletos, comunicados e solicitações</li>
       </ul>
-      <h3>Fluxo de Onboarding</h3>
-      <ol>
-        <li>Global Admin cria condomínio e escolhe plano (Básico/Pro/Enterprise).</li>
-        <li>Convite enviado ao Síndico por e-mail com link seguro.</li>
-        <li>Síndico completa cadastro e paga assinatura (boleto/cartão).</li>
-        <li>Acesso total liberado após confirmação de pagamento.</li>
-      </ol>
+
       <h3>Modelos de Assinatura</h3>
+      <table>
+        <thead>
+          <tr><th>Plano</th><th>Unidades</th><th>Valor Mensal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Básico</td><td>até 50</td><td>R$ 100,00</td></tr>
+          <tr><td>Profissional</td><td>até 200</td><td>R$ 250,00</td></tr>
+          <tr><td>Enterprise</td><td>ilimitado</td><td>sob consulta</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Formas de Pagamento</h3>
       <ul>
-        <li><strong>Básico:</strong> até 50 unidades — R$ 100/mês.</li>
-        <li><strong>Profissional:</strong> até 200 unidades — R$ 250/mês.</li>
-        <li><strong>Enterprise:</strong> ilimitado — valor sob consulta.</li>
+        <li>Pix (Webhook, QR Code dinâmico)</li>
+        <li>Boleto (CNAB240, geração automática)</li>
+        <li>Cartão de Crédito (Stripe ou Pagar.me)</li>
       </ul>
-      <h3>Dashboards</h3>
+
+      <h3>Onboarding & Fluxo</h3>
+      <ol>
+        <li>Global Admin cria condomínio e escolhe plano.</li>
+        <li>Convite por e-mail ao Síndico com link seguro.</li>
+        <li>Síndico completa cadastro e definie forma de pagamento.</li>
+        <li>Acesso liberado após confirmação de pagamento.</li>
+      </ol>
+
+      <h3>Endpoints de Administração</h3>
       <ul>
-        <li><strong>Global Admin:</strong> MRR, churn, número de condomínios ativos e receita por plano.</li>
-        <li><strong>Condomínio:</strong> inadimplência, fluxo de caixa, uso de espaços e engagement de comunicados.</li>
+        <li>GET /api/admin/subscriptions – lista planos</li>
+        <li>POST /api/admin/subscriptions – cria/atualiza plano</li>
+        <li>GET /api/admin/users – lista administradores</li>
+        <li>POST /api/admin/users – convida/atribui papel</li>
+        <li>PUT /api/admin/users/{id}/role – altera permissão</li>
+        <li>DELETE /api/admin/users/{id} – remove colaborador</li>
       </ul>
     </section>
-
-    <footer>
-      © 2025 Condomy — Documentação Completa.  
-      Mantenha sempre este arquivo sincronizado com o GitHub.
-    </footer>
-
   </main>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Scroll suave e marcação do link ativo
+    document.querySelectorAll('.doc-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('.doc-link').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+        const target = document.querySelector(link.getAttribute('href'));
+        window.scrollTo({ top: target.offsetTop - 20, behavior: 'smooth' });
+      });
+    });
+
+    // Carrega mock-screen na DIV de preview
+    document.querySelectorAll('[data-screen]').forEach(link => {
+      link.addEventListener('click', async e => {
+        e.preventDefault();
+        const url = link.getAttribute('data-screen');
+        const preview = document.getElementById('screen-preview');
+        const container = document.getElementById('screen-content');
+        preview.style.display = 'block';
+        container.innerHTML = '<p>Carregando…</p>';
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error();
+          const html = await res.text();
+          container.innerHTML = html;
+        } catch {
+          container.innerHTML = '<p style="color:red">Erro ao carregar mock-screen.</p>';
+        }
+      });
+    });
+
+    // Fecha preview
+    document.getElementById('close-preview')
+      .addEventListener('click', () => {
+        document.getElementById('screen-preview').style.display = 'none';
+        document.getElementById('screen-content').innerHTML = '';
+      });
+  </script>
 </body>
 </html>

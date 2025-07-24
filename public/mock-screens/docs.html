@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Condomy Docs</title>
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0 }
+    html, body { height:100%; font-family:Arial,sans-serif; background:#f5f5f5; }
+    .sidebar {
+      position:fixed; top:0; left:0; width:220px; height:100%;
+      background:#004d99; color:#fff; overflow:auto; padding:1rem;
+    }
+    .sidebar h2 { margin-bottom:.5rem; font-size:1.2rem; }
+    .sidebar ul { list-style:none; }
+    .sidebar li { margin:.3rem 0; }
+    .sidebar button {
+      width:100%; text-align:left; background:transparent;
+      border:none; color:white; padding:.4rem .6rem; cursor:pointer;
+    }
+    .sidebar button:hover { background:rgba(255,255,255,0.2) }
+    .main {
+      margin-left:220px; padding:1rem; height:100%; overflow:auto;
+    }
+    #preview {
+      display:none;
+      position:fixed; top:1rem; left:230px; right:1rem; bottom:1rem;
+      background:#fff; border:1px solid #ccc; box-shadow:0 0 8px rgba(0,0,0,0.2);
+      z-index:10; overflow:hidden;
+    }
+    #preview .toolbar {
+      background:#f0f0f0; padding:.5rem; text-align:right;
+      border-bottom:1px solid #ccc;
+    }
+    #preview .toolbar button {
+      background:#3273dc; color:#fff; border:none;
+      padding:.4rem .8rem; cursor:pointer;
+    }
+    #preview .toolbar button:hover { background:#004d99 }
+    #preview iframe {
+      width:100%; height:calc(100% - 2.2rem); border:none;
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2>Mock-Screens</h2>
+    <ul>
+      <li><button data-src="mock-screens/ocorrencias.html">ocorrencias.html</button></li>
+      <li><button data-src="mock-screens/painel-sindico.html">painel-sindico.html</button></li>
+      <li><button data-src="mock-screens/perfil-morador.html">perfil-morador.html</button></li>
+      <!-- repita para todas as telas… -->
+    </ul>
+  </aside>
+
+  <div class="main">
+    <h1>1. Visão Geral</h1>
+    <p>Condomy é a plataforma SaaS multi-tenant para gestão de condomínios…</p>
+    <!-- continue com as outras seções 2 a 12 -->
+  </div>
+
+  <div id="preview">
+    <div class="toolbar">
+      <button id="close">Voltar</button>
+    </div>
+    <iframe id="frame"></iframe>
+  </div>
+
+  <script>
+    // abre o mock dentro do iframe
+    document.querySelectorAll('[data-src]').forEach(btn => {
+      btn.onclick = () => {
+        const src = btn.getAttribute('data-src');
+        document.getElementById('frame').src = src;
+        document.getElementById('preview').style.display = 'block';
+      };
+    });
+    // fecha o preview
+    document.getElementById('close').onclick = () => {
+      document.getElementById('preview').style.display = 'none';
+      document.getElementById('frame').src = '';
+    };
+  </script>
+
+</body>
+</html>
