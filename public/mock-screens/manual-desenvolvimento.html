@@ -1,0 +1,297 @@
+<!-- manual-desenvolvimento.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Condomy – Manual Completo de Desenvolvimento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+    header, footer {
+      text-align: center;
+      padding: 20px 0;
+    }
+    h1, h2, h3 {
+      color: #1e88e5;
+      margin-top: 1.5em;
+    }
+    section {
+      margin-bottom: 2em;
+    }
+    code {
+      background: #f7f7f7;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    pre {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    ul, ol {
+      margin-left: 1.2em;
+    }
+    .step {
+      border-left: 4px solid #1e88e5;
+      padding-left: 10px;
+      margin-bottom: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Condomy – Manual Completo de Desenvolvimento</h1>
+    <p>Passo-a-passo detalhado para criar, aprovar e manter toda a plataforma.</p>
+  </header>
+
+  <!-- 1. Pré-requisitos -->
+  <section id="pre-requisitos">
+    <h2>1. Pré-requisitos</h2>
+    <ul>
+      <li>Node.js ≥ 16 e npm/yarn.</li>
+      <li>Java 17 e Maven/Gradle.</li>
+      <li>Docker e Docker Compose.</li>
+      <li>Conta AWS (EC2, RDS, S3, EKS) e Terraform instalado.</li>
+      <li>Editor de código (VSCode recomendado).</li>
+    </ul>
+  </section>
+
+  <!-- 2. Criar Protótipos HTML -->
+  <section id="prototipos-html">
+    <h2>2. Criação dos Protótipos HTML</h2>
+    <div class="step">
+      <p>
+        <strong>Objetivo:</strong> gerar wireframes estáticos para aprovação rápida pelo time e stakeholders.
+      </p>
+      <ol>
+        <li>Na pasta <code>public/mock-screens</code>, crie arquivos semânticos:
+          <pre>
+&lt;header&gt;&lt;h1&gt;Título&lt;/h1&gt;&lt;/header&gt;
+&lt;main&gt;&lt;!-- Conteúdo --&gt;&lt;/main&gt;
+&lt;footer&gt;&lt;p&gt;© Condomy&lt;/p&gt;&lt;/footer&gt;
+          </pre>
+        </li>
+        <li>Adicione CSS mínimo (reset + grid simples) em cada HTML:</li>
+          <pre>
+&lt;style&gt;
+  * { margin:0; padding:0; box-sizing:border-box; }
+  .container { display:grid; gap:16px; }
+&lt;/style&gt;
+          </pre>
+        <li>Comente cada parte para guiar edições:
+          <pre>
+&lt;!--
+  Botão principal de ação.
+  Alterar texto dentro de <button> se necessário.
+--&gt;
+&lt;button&gt;Enviar&lt;/button&gt;
+          </pre>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. Aprovação dos Mock-Screens -->
+  <section id="aprovacao-mocks">
+    <h2>3. Aprovação dos Mock-Screens</h2>
+    <div class="step">
+      <ol>
+        <li>Compartilhe o link dos HTMLs com o time de UI/UX e stakeholders.</li>
+        <li>Colete feedback de cores, espaçamentos e fluxo de navegação.</li>
+        <li>Atualize os protótipos, mantendo comentários.</li>
+        <li>Marque como “aprovado” renomeando para <code>*.approved.html</code>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. Migração para React + TypeScript -->
+  <section id="migração-react">
+    <h2>4. Migração para React + TypeScript</h2>
+    <div class="step">
+      <ol>
+        <li>Inicie o projeto Next.js:
+          <pre>
+npx create-next-app condomy-frontend --typescript
+          </pre>
+        </li>
+        <li>Para cada mock aprovado:
+          <ul>
+            <li>Crie pasta e arquivo em <code>src/components</code>:</li>
+            <pre>// Ex: Button.tsx
+export interface ButtonProps { text: string; onClick: () => void; }
+export function Button({ text, onClick }: ButtonProps) {
+  return (
+    &lt;button
+      // id para testes e estilos
+      id="btn-main"
+      // Tailwind classes
+      className="px-4 py-2 bg-blue-500 text-white rounded"
+      onClick={onClick} // chama a função passada
+    &gt;
+      {text} // mostra o texto passado via props
+    &lt;/button&gt;
+  );
+}
+            </pre>
+            <li>Copie o layout e converta tags HTML em JSX (class → className).</li>
+            <li>Tipagem com <code>interface</code> ou <code>type</code> e validações Zod nos forms.</li>
+            <li>Documente linha-a-linha para explicar cada atributo e função.</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Estrutura de Pastas e Documentação -->
+  <section id="estrutura-e-docs">
+    <h2>5. Estrutura de Pastas & Documentação</h2>
+    <div class="step">
+      <p>
+        Organize assim e crie um <code>README.md</code> em cada nível:
+      </p>
+      <pre>
+condomy-frontend/
+├ public/                # mock-screens e assets
+├ src/
+│  ├ app/                # arquivo de rotas e providers
+│  ├ components/         # componentes React
+│  ├ hooks/              # custom hooks
+│  ├ services/           # api.ts, clients e interceptors
+│  ├ styles/             # globals.css, tailwind.config.js
+│  └ utils/              # helpers e validadores
+└ docs/
+   ├ architecture.md     # descrição da arquitetura
+   ├ api/                # especificações OpenAPI
+   └ ux-guidelines.md    # cores, tipografia e espaçamentos
+      </pre>
+    </div>
+  </section>
+
+  <!-- 6. Desenvolver Backend -->
+  <section id="desenvolver-backend">
+    <h2>6. Desenvolver Backend</h2>
+    <div class="step">
+      <ol>
+        <li>Clone o monorepo e rode <code>./scripts/start-all.sh</code>.</li>
+        <li>Configure ambientes em <code>infra/terraform</code> com variáveis sensíveis no Vault/KMS.</li>
+        <li>Em cada microserviço:
+          <ul>
+            <li>Defina entidade JPA, repositório e serviço.</li>
+            <li>Exponha endpoints REST no controller com Swagger tags.</li>
+            <li>Implemente validações com <code>@Valid</code> e classes DTO.</li>
+            <li>Configure eventos RabbitMQ para comunicação assíncrona.</li>
+          </ul>
+        </li>
+        <li>Teste localmente usando o perfil <code>dev</code> e banco H2.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 7. Desenvolver Frontend -->
+  <section id="desenvolver-frontend">
+    <h2>7. Desenvolver Frontend</h2>
+    <div class="step">
+      <ol>
+        <li>Implemente layout geral em <code>src/app/layout.tsx</code>:</li>
+          <pre>
+// Exemplo mínimo
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;html lang="pt-BR"&gt;
+      &lt;body&gt;
+        {children}
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}
+          </pre>
+        <li>Crie contexto de autenticação em <code>src/hooks/useAuth.tsx</code> com JWT e refresh.</li>
+        <li>Use React Query para chamadas de API e cache em <code>src/services/api.ts</code>.</li>
+        <li>Formulários: React Hook Form + Zod para validação tipada.</li>
+        <li>Teste cada componente com Jest + React Testing Library.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 8. Segurança → nunca vaze dados -->
+  <section id="seguranca">
+    <h2>8. Segurança das Aplicações</h2>
+    <div class="step">
+      <ul>
+        <li>Use HTTPS/TLS em todas as conexões (backend e frontend).</li>
+        <li>Sanitize e escape todas as entradas para evitar XSS/SQL Injection.</li>
+        <li>Configure CORS restrito no Gateway e CSP no frontend.</li>
+        <li>Armazene segredos no AWS KMS ou HashiCorp Vault.</li>
+        <li>Tokens JWT com expiração curta e refresh tokens seguros.</li>
+        <li>WAF, rate limiting e pentests periódicos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. Testes -->
+  <section id="testes">
+    <h2>9. Testes</h2>
+    <div class="step">
+      <ul>
+        <li>Backend: unitários (JUnit), integração (Testcontainers) e contratos (Pact).</li>
+        <li>Frontend: Jest + RTL, coverage ≥ 80%.</li>
+        <li>E2E: Cypress para fluxos críticos (login, boleto, comunicação).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10. CI/CD -->
+  <section id="cicd-deploy">
+    <h2>10. CI/CD & Deploy</h2>
+    <div class="step">
+      <ol>
+        <li>GitHub Actions pipeline:
+          <ul>
+            <li>Lint, build e testes.</li>
+            <li>SonarCloud analysis e security scan.</li>
+            <li>Build de imagens Docker e push para registry.</li>
+          </ul>
+        </li>
+        <li>Infraestrutura como código com Terraform (EKS, RDS, S3).</li>
+        <li>Deploy:
+          <ul>
+            <li>Backend: Kubernetes Rolling Update.</li>
+            <li>Frontend: Vercel ou S3 + CloudFront.</li>
+          </ul>
+        </li>
+        <li>Monitoramento: ELK, Prometheus/Grafana e alertas Slack/PagerDuty.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 11. Manutenção & Atualizações -->
+  <section id="manutencao">
+    <h2>11. Manutenção & Atualizações</h2>
+    <div class="step">
+      <ul>
+        <li>Versionamento semântico (MAJOR.MINOR.PATCH).</li>
+        <li>Branches: main (produção), develop (staging), feature/*, hotfix/*.</li>
+        <li>Atualize dependências com Dependabot e rodar testes no PR.</li>
+        <li>Documente novas APIs em OpenAPI e atualize <code>docs/api/</code>.</li>
+        <li>Reavalie segurança trimestralmente e aplique patches.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Condomy – Manual completo de desenvolvimento.</p>
+  </footer>
+</body>
+</html>
+```

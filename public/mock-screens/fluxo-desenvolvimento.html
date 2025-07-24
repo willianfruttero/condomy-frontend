@@ -1,125 +1,148 @@
+<!-- fluxo-desenvolvimento.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Meta básicas -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Título -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Condomy – Fluxo de Desenvolvimento</title>
-  <!-- CSS inline para o fluxograma -->
+  <link rel="stylesheet" href="styles/global.css">
   <style>
-    /* Estilos básicos do fluxograma */
-    .flowchart { display: flex; flex-direction: column; align-items: center; }
-    .step { 
-      border: 2px solid #4A90E2; 
-      border-radius: 8px; 
-      padding: 16px; 
-      margin: 12px;
-      width: 80%;
-      max-width: 600px;
-      background: #F0F8FF;
+    body { font-family:Arial,sans-serif; color:#333; margin:0; padding:0 20px; line-height:1.5 }
+    header, footer { text-align:center; padding:20px 0 }
+    h1,h2,h3 { color:#1e88e5; margin-top:1.5em }
+    section { margin-bottom:2em }
+    table { width:100%; border-collapse:collapse; margin-top:12px }
+    th,td { border:1px solid #ccc; padding:8px; text-align:left; font-size:0.9em }
+    th { background:#f1f1f1 }
+    .flowchart { display:flex; flex-direction:column; align-items:center }
+    .step {
+      border:2px solid #4A90E2; border-radius:8px; background:#F0F8FF;
+      padding:16px; margin:12px; width:90%; max-width:600px
     }
-    .arrow {
-      font-size: 2em;
-      color: #4A90E2;
-      margin: -8px 0;
-    }
-    /* Mapa de lógica x UI x estilo */
-    .map { 
-      margin-top: 32px; 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 12px;
-    }
-    .map div {
-      border: 1px dashed #999;
-      padding: 8px;
-      background: #FBFBFB;
-      text-align: center;
-    }
+    .arrow { font-size:2em; color:#4A90E2; margin:-8px 0 }
+    pre.folder-structure { background:#f7f7f7; padding:12px; border-radius:4px; overflow-x:auto; }
+    .map-five { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-top:16px }
+    .map-five div { border:1px dashed #999; padding:12px; background:#fbfbfb; text-align:center; }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Fluxo de Desenvolvimento da Plataforma</h1>
-    <p>Passo a passo desde protótipos HTML até a versão final em React + TypeScript.</p>
+    <h1>Fluxo de Desenvolvimento</h1>
+    <p>Do mock-screen HTML ao deploy, cada passo detalhado para qualquer pessoa seguir.</p>
   </header>
 
-  <div class="flowchart">
-    <!-- Passo 1 -->
-    <div class="step">
-      <h2>1. Criação dos Protótipos HTML</h2>
-      <ul>
-        <li>Esqueleto HTML básico com semântica (&lt;header&gt;, &lt;main&gt;, &lt;footer&gt;).</li>
-        <li>CSS mínimo para layout estagnado (reset e grid simples).</li>
-        <li>Comentários explicativos em cada tag.</li>
-      </ul>
-    </div>
-    <div class="arrow">↓</div>
+  <!-- 1. Linha do Tempo & Milestones -->
+  <section id="timeline">
+    <h2>1. Linha do Tempo & Milestones</h2>
+    <table>
+      <thead>
+        <tr><th>Fase</th><th>Responsável</th><th>Entregável</th><th>Quando</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Protótipos HTML</td><td>Dev</td><td>Mock-screens criados</td><td>Semana 1–2</td></tr>
+        <tr><td>Revisão UI/UX</td><td>Design</td><td>Feedback aplicado</td><td>Semana 3</td></tr>
+        <tr><td>JSX + TS</td><td>Dev</td><td>Componentes iniciais</td><td>Semana 4–6</td></tr>
+        <tr><td>QA & Testes</td><td>QA</td><td>Coverage ≥ 80%</td><td>Semana 7</td></tr>
+        <tr><td>Staging</td><td>Ops</td><td>Demo disponível</td><td>Semana 8</td></tr>
+        <tr><td>Produção</td><td>Ops</td><td>Go-Live</td><td>Semana 9</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-    <!-- Passo 2 -->
-    <div class="step">
-      <h2>2. Revisão e Aprovação</h2>
-      <ul>
-        <li>Time de UI/UX ajusta cores e espaçamentos.</li>
-        <li>Stakeholders confirmam fluxo de navegação.</li>
-        <li>Validação de acessibilidade e responsividade básica.</li>
-      </ul>
-    </div>
-    <div class="arrow">↓</div>
+  <!-- 2. Árvore de Pastas & Documentos -->
+  <section id="folder-structure">
+    <h2>2. Estrutura de Pastas & Documentos</h2>
+    <pre class="folder-structure">
+condomy-backend/
+├ api-gateway/
+├ auth-service/
+├ condominium-service/
+├ communication-service/
+├ finance-service/
+├ common-lib/
+└ infra/
 
-    <!-- Passo 3 -->
-    <div class="step">
-      <h2>3. Migração para React + TypeScript</h2>
-      <ul>
-        <li>Cada HTML vira um componente JSX.</li>
-        <li>Props tipadas com interfaces ou types.</li>
-        <li>Camada de estilo via Styled-Components ou Tailwind.</li>
-        <li>Testes unitários com Jest + React Testing Library.</li>
-      </ul>
-    </div>
-    <div class="arrow">↓</div>
+condomy-frontend/
+├ public/
+│  └ mock-screens/
+├ src/
+│  ├ app/
+│  ├ components/
+│  ├ hooks/
+│  ├ services/
+│  ├ styles/
+│  └ utils/
+└ docs/
+    </pre>
+    <p>
+      Cada subpasta tem um <code>README.md</code> com propósito, comandos de build e testes.
+      As specs OpenAPI ficam em <code>docs/api/</code>; Wireframes em <code>public/mock-screens/</code>.
+    </p>
+  </section>
 
-    <!-- Passo 4 -->
-    <div class="step">
-      <h2>4. UI/UX Avançado e Responsividade</h2>
-      <ul>
-        <li>Media queries e breakpoints no Tailwind.</li>
-        <li>Testes manuais em dispositivos reais.</li>
-        <li>Animações suaves com framer-motion (opcional).</li>
-      </ul>
+  <!-- 3. Fluxograma Geral -->
+  <section id="development-flow">
+    <h2>3. Fluxograma Passo a Passo</h2>
+    <div class="flowchart">
+      <div class="step">
+        <h3>Passo 1: Protótipos HTML</h3>
+        <p>Crie arquivos semânticos (<code>header/main/footer</code>), CSS mínimo e comentários.</p>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <h3>Passo 2: Revisão UI/UX</h3>
+        <p>Ajuste cores, espaçamentos, responsividade básica e acessibilidade (WCAG 2.1 AA).</p>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <h3>Passo 3: React + TypeScript</h3>
+        <p>Transforme HTML em JSX, adicione <code>props</code> tipadas, estilos e testes unitários.</p>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <h3>Passo 4: QA & Performance</h3>
+        <p>Jest/RTL, Cypress E2E, Sonar quality gate, Lighthouse ≥ 90, bundle analysis.</p>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <h3>Passo 5: Deploy & Observabilidade</h3>
+        <p>CI/CD (GitHub Actions), Kubernetes (Rolling Update), ELK, Prometheus/Grafana, alertas.</p>
+      </div>
     </div>
-    <div class="arrow">↓</div>
+  </section>
 
-    <!-- Passo 5 -->
-    <div class="step">
-      <h2>5. Deploy e Monitoramento</h2>
-      <ul>
-        <li>Pipelines CI/CD (GitHub Actions) para build e testes.</li>
-        <li>Deploy incremental em staging e produção (EKS, Vercel, CloudFront).</li>
-        <li>Monitoramento com Prometheus, ELK e alertas no Slack/PagerDuty.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Mapa lógico x UI x Estilo -->
-  <section class="map">
-    <div>
-      <h3>Lógica</h3>
-      <p>Funções, validações, chamadas API e tratamento de dados.</p>
-    </div>
-    <div>
-      <h3>UI/UX</h3>
-      <p>Componentes, hierarquia visual, acessibilidade e fluxos.</p>
-    </div>
-    <div>
-      <h3>Estilo</h3>
-      <p>Cores, tipografia, espaçamentos, responsividade e animações.</p>
+  <!-- 4. Mapa de Lógica × UI × Estilo × Dados × Infra -->
+  <section id="logic-ui-style-plus">
+    <h2>4. Mapa Detalhado de Conexões</h2>
+    <div class="map-five">
+      <div>
+        <h4>Lógica</h4>
+        <p>Hooks, context, state, validações Zod, chamadas Axios/GraphQL.</p>
+      </div>
+      <div>
+        <h4>UI/UX</h4>
+        <p>Layouts, responsividade, acessibilidade, fluxos e protótipos.</p>
+      </div>
+      <div>
+        <h4>Estilo</h4>
+        <p>Design tokens, Tailwind config, Styled-Components, animações.</p>
+      </div>
+      <div>
+        <h4>Dados</h4>
+        <p>Cache React Query, normalização, revalidação, interceptors.</p>
+      </div>
+      <div>
+        <h4>Infra</h4>
+        <p>Terraform, Helm charts, CI/CD, monitoramento, segurança e IAM.</p>
+      </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2025 Condomy – Fluxo de desenvolvimento documentado.</p>
+    <p>© 2025 Condomy – todo o caminho documentado para qualquer pessoa implementar.</p>
   </footer>
+
 </body>
 </html>
+```
